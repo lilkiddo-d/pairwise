@@ -7,7 +7,7 @@ signs only through the Foundry keystore account `pairwise-deployer`, the keeper 
 |---|---|
 | Chain | Robinhood Chain mainnet, chain ID **4663**, gas token **ETH** |
 | RPC | `https://rpc.mainnet.chain.robinhood.com` (public, rate-limited — a dedicated provider is better for the keeper) |
-| Explorer / verifier | Blockscout — `https://robinhoodchain.blockscout.com` (`--verifier blockscout`) |
+| Explorer / verifier | Blockscout `https://robinhoodchain.blockscout.com`; verify via **Sourcify** (Blockscout's API is behind a Cloudflare challenge that blocks CLI tools) |
 | Cost | dry run estimate: ~34.1M gas ≈ **0.0014 ETH** at 0.04 gwei → fund the deployer with **0.01 ETH** for headroom |
 
 Prerequisites: Foundry (`foundryup`), Node 20+, pnpm 10, and in `contracts/`: `forge build` succeeds.
@@ -49,7 +49,7 @@ cd contracts && forge script script/Deploy.s.sol --rpc-url https://rpc.mainnet.c
 From `contracts/` (set `TIMELOCK_ADMIN` / `GUARDIAN_ADDRESS` first if you use Safes):
 
 ```bash
-KEEPER_ADDRESS=$(cast wallet address --account pairwise-keeper) forge script script/Deploy.s.sol --rpc-url https://rpc.mainnet.chain.robinhood.com --account pairwise-deployer --broadcast --slow --verify --verifier blockscout --verifier-url https://robinhoodchain.blockscout.com/api/
+KEEPER_ADDRESS=$(cast wallet address --account pairwise-keeper) forge script script/Deploy.s.sol --rpc-url https://rpc.mainnet.chain.robinhood.com --account pairwise-deployer --broadcast --slow --verify --verifier sourcify
 ```
 
 What it does, in order: deploys the 48h Timelock, MarketClock (+ 2026–2027 NYSE holidays), OracleAdapter (Chainlink
@@ -58,12 +58,15 @@ feeds), Uniswap v3 swap venue (routes), SpreadOracle, StrategyEngine, FeeCollect
 role to the Timelock and **renounces every deployer role**, then asserts the deployer holds nothing. On success it writes
 `deployments/4663.json` and `app/public/deployments/4663.json` (the frontend config).
 
-If Blockscout verification is rate-limited (its API sits behind Cloudflare), the deployment itself is unaffected; re-run
-just the verification:
+If verification didn't run or failed, the deployment itself is unaffected. Verify every contract on Sourcify (no keys
+needed; Blockscout shows Sourcify-verified sources automatically). From `contracts/`, for each created contract listed in
+`broadcast/Deploy.s.sol/4663/run-latest.json`:
 
 ```bash
-forge script script/Deploy.s.sol --rpc-url https://rpc.mainnet.chain.robinhood.com --account pairwise-deployer --resume --verify --verifier blockscout --verifier-url https://robinhoodchain.blockscout.com/api/
+forge verify-contract <address> src/<Name>.sol:<Name> --chain 4663 --verifier sourcify --rpc-url https://rpc.mainnet.chain.robinhood.com --watch
 ```
+
+Do **not** use `--verifier blockscout`: its API answers CLI requests with a Cloudflare 403 challenge.
 
 Vaults and adapters are EIP-1167 clones of verified implementations; Blockscout shows them as minimal proxies.
 
