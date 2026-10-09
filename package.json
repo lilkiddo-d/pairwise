@@ -1,0 +1,24 @@
+{
+  "name": "pairwise",
+  "private": true,
+  "description": "Market-neutral pairs-trading vaults for tokenized stocks",
+  "packageManager": "pnpm@10.18.0",
+  "scripts": {
+    "build:contracts": "cd contracts && forge build",
+    "test:contracts": "cd contracts && forge test --no-match-path \"test/fork/*\"",
+    "test:fork": "cd contracts && RUN_FORK_TESTS=true forge test --match-path \"test/fork/*\" -vv",
+    "coverage": "cd contracts && forge coverage --code-size-limit 300000 --no-match-path \"test/fork/*\" --report summary",
+    "slither": "cd contracts && slither . --filter-paths \"lib/|test/|script/\" --exclude-dependencies",
+    "app:dev": "pnpm --filter @pairwise/app dev",
+    "app:build": "pnpm --filter @pairwise/app build",
+    "keeper": "pnpm --filter @pairwise/keeper keeper"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "keccak",
+      "bufferutil",
+      "utf-8-validate"
+    ]
+  }
+}

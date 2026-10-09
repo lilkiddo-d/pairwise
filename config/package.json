@@ -1,0 +1,10 @@
+{
+  "name": "@pairwise/config",
+  "version": "1.0.0",
+  "private": true,
+  "main": "chains.ts",
+  "types": "chains.ts",
+  "dependencies": {
+    "viem": "^2.38.0"
+  }
+}

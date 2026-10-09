@@ -1,0 +1,19 @@
+{
+  "name": "@pairwise/keeper",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "keeper": "tsx src/keeper.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@pairwise/config": "workspace:*",
+    "viem": "^2.38.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.8.0"
+  }
+}

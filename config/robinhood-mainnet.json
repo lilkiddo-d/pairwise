@@ -1,0 +1,253 @@
+{
+  "_comment": "Robinhood Chain mainnet addresses. Every address below was read from an official source (see `sources`) and re-checked on-chain via the public RPC on 2026-10-08. Do not hand-edit without re-verifying.",
+  "chainId": 4663,
+  "name": "Robinhood Chain",
+  "nativeCurrency": {
+    "name": "Ether",
+    "symbol": "ETH",
+    "decimals": 18
+  },
+  "rpcUrls": [
+    "https://rpc.mainnet.chain.robinhood.com"
+  ],
+  "explorer": "https://robinhoodchain.blockscout.com",
+  "verifier": {
+    "type": "blockscout",
+    "url": "https://robinhoodchain.blockscout.com/api/"
+  },
+  "sources": {
+    "network": "https://docs.robinhood.com/chain/deploy-smart-contracts/",
+    "coreTokens": "https://docs.robinhood.com/chain/contracts/",
+    "stockTokens": "https://api.robinhood.com/rhj/assets (official asset registry that renders the table on https://docs.robinhood.com/chain/contracts/)",
+    "chainlinkFeeds": "https://docs.chain.link/data-feeds/price-feeds/addresses?network=robinhood (raw: https://reference-data-directory.vercel.app/feeds-robinhood-mainnet.json)",
+    "uniswapV3": "https://developers.uniswap.org/docs/protocols/v3/deployments/v3-robinhood-chain-deployments",
+    "morpho": "https://api.morpho.org/graphql (markets where chainId=4663; Morpho Blue singleton read from market.morphoBlue.address, params re-read on-chain via idToMarketParams)",
+    "sequencerUptimeFeed": "https://docs.chain.link/data-feeds/l2-sequencer-feeds (Robinhood Chain NOT listed as of 2026-10-08 -> disabled, see DECISIONS.md)"
+  },
+  "tokens": {
+    "USDG": {
+      "address": "0x5fc5360D0400a0Fd4f2af552ADD042D716F1d168",
+      "decimals": 6
+    },
+    "WETH": {
+      "address": "0x0Bd7D308f8E1639FAb988df18A8011f41EAcAD73",
+      "decimals": 18
+    },
+    "steakUSDG": {
+      "address": "0xBeEff033F34C046626B8D0A041844C5d1A5409dd",
+      "decimals": 18,
+      "note": "Steakhouse USDG Morpho Vault V2 (ERC-4626 over USDG). Used as Morpho collateral."
+    }
+  },
+  "chainlink": {
+    "sequencerUptimeFeed": "0x0000000000000000000000000000000000000000",
+    "USDG": {
+      "feed": "0x61B7e5650328764B076A108EFF5fa7282a1B9aD2",
+      "decimals": 8,
+      "heartbeat": 86400
+    }
+  },
+  "uniswapV3": {
+    "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+    "swapRouter02": "0xcaf681a66d020601342297493863e78c959e5cb2",
+    "quoterV2": "0x33e885ed0ec9bf04ecfb19341582aadcb4c8a9e7",
+    "multicall": "0x282a3c4d320cc7f0d5eaf56b8029e4b88338f0a3"
+  },
+  "morpho": {
+    "blue": "0x9D53d5E3bd5E8d4Cbfa6DB1ca238AEA02E651010",
+    "adaptiveCurveIrm": "0x2BD3d5965B26B51814AC95127B2b80dD6CcC0fa1"
+  },
+  "stocks": {
+    "SPY": {
+      "address": "0x117cc2133c37B721F49dE2A7a74833232B3B4C0C",
+      "decimals": 18,
+      "feed": "0x319724394D3A0e3669269846abE664Cd621f9f6A",
+      "feedDecimals": 8,
+      "heartbeat": 86400,
+      "morphoMarketId": "0x1cd22321a4d27054a8cd029c73c53432e8a231f8df1a3981b1ae1c274175d381",
+      "morphoCollateral": "steakUSDG",
+      "lltv": "0.77",
+      "uniPools": [
+        "0xa7Bb1AC63BBaB0C44316E6c8C455213441689167"
+      ],
+      "route": {
+        "tokens": [
+          "SPY",
+          "USDG"
+        ],
+        "fees": [
+          500
+        ]
+      }
+    },
+    "QQQ": {
+      "address": "0xD5f3879160bc7c32ebb4dC785F8a4F505888de68",
+      "decimals": 18,
+      "feed": "0x80901d846d5D7B030F26B480776EE3b29374C2ae",
+      "feedDecimals": 8,
+      "heartbeat": 86400,
+      "morphoMarketId": "0xfbeb9596a8a0202dde46de7a49af15ee963c8678a71edb6dd1c8b283595cbdae",
+      "morphoCollateral": "steakUSDG",
+      "lltv": "0.77",
+      "uniPools": [
+        "0xd60a5d14db690b7afad71f76b108071d7175597d"
+      ],
+      "route": {
+        "tokens": [
+          "QQQ",
+          "USDG"
+        ],
+        "fees": [
+          500
+        ]
+      }
+    },
+    "NVDA": {
+      "address": "0xd0601CE157Db5bdC3162BbaC2a2C8aF5320D9EEC",
+      "decimals": 18,
+      "feed": "0x379EC4f7C378F34a1B47E4F3cbeBCbAC3E8E9F15",
+      "feedDecimals": 8,
+      "heartbeat": 86400,
+      "morphoMarketId": "0x7ff4053d7caa99de7aa19febadcc2178377e8a31b163046539d6fb35c5abc08b",
+      "morphoCollateral": "steakUSDG",
+      "lltv": "0.625",
+      "uniPools": [
+        "0xd4EB21209C4D6093f80B5b84f5C45cc093EA14a3"
+      ],
+      "route": {
+        "tokens": [
+          "NVDA",
+          "USDG"
+        ],
+        "fees": [
+          500
+        ]
+      }
+    },
+    "COIN": {
+      "address": "0x6330D8C3178a418788dF01a47479c0ce7CCF450b",
+      "decimals": 18,
+      "feed": "0xA3a468A452940B7D6b69991207B508c609a98Ef2",
+      "feedDecimals": 8,
+      "heartbeat": 86400,
+      "morphoMarketId": "0x7eb15a4033030e5cbf34ea1823545b918d29e5e59e7d8c1d35aee2df3e114c98",
+      "morphoCollateral": "steakUSDG",
+      "lltv": "0.625",
+      "uniPools": [
+        "0x6707aeac7d0e519b083219d27bb427364363183a",
+        "0x69BfaF19C9f377BB306a89aEd9F6B07e2c1a8d9a"
+      ],
+      "route": {
+        "tokens": [
+          "COIN",
+          "WETH",
+          "USDG"
+        ],
+        "fees": [
+          3000,
+          500
+        ]
+      }
+    },
+    "MSTR": {
+      "address": "0xec262a75e413fAfD0dF80480274532C79D42da09",
+      "decimals": 18,
+      "feed": "0x396118bdFB181e6240E74D243F266B061c0edc3D",
+      "feedDecimals": 8,
+      "heartbeat": 86400,
+      "morphoMarketId": "0x0fc6938b8b73689ee822ff59b775972931f33dfda49880b43b05a14396111a9d",
+      "morphoCollateral": "steakUSDG",
+      "lltv": "0.625",
+      "uniPools": [
+        "0x17578c0e0d15da44f31677263114f71ae76653ea"
+      ],
+      "route": {
+        "tokens": [
+          "MSTR",
+          "USDG"
+        ],
+        "fees": [
+          10000
+        ]
+      }
+    },
+    "PLTR": {
+      "address": "0x894E1EC2D74FFE5AEF8Dc8A9e84686acCB964F2A",
+      "decimals": 18,
+      "feed": "0x820ABedFF239034956B7A9d2F0a331f9F075eB4c",
+      "feedDecimals": 8,
+      "heartbeat": 86400,
+      "morphoMarketId": "0x85571555a4d98cb7efaf91ffd5a9d6b2db33d4a631c6b16633e537ac6cb4b590",
+      "morphoCollateral": "steakUSDG",
+      "lltv": "0.625",
+      "uniPools": [
+        "0x851680416a4f4e1c463d45171d61acddbc8554c0"
+      ],
+      "route": {
+        "tokens": [
+          "PLTR",
+          "USDG"
+        ],
+        "fees": [
+          3000
+        ]
+      }
+    }
+  },
+  "pairs": [
+    {
+      "id": "SPY-QQQ",
+      "a": "SPY",
+      "b": "QQQ"
+    },
+    {
+      "id": "COIN-MSTR",
+      "a": "COIN",
+      "b": "MSTR"
+    },
+    {
+      "id": "NVDA-QQQ",
+      "a": "NVDA",
+      "b": "QQQ"
+    },
+    {
+      "id": "PLTR-NVDA",
+      "a": "PLTR",
+      "b": "NVDA"
+    }
+  ],
+  "holidays": {
+    "_source": "NYSE holiday calendar https://www.nyse.com/markets/hours-calendars (ET day numbers = days since 1970-01-01)",
+    "closed": [
+      20454,
+      20472,
+      20500,
+      20546,
+      20598,
+      20623,
+      20637,
+      20703,
+      20783,
+      20812,
+      20819,
+      20836,
+      20864,
+      20903,
+      20969,
+      20987,
+      21004,
+      21067,
+      21147,
+      21176
+    ],
+    "earlyClose": [
+      20784,
+      20811,
+      21148
+    ]
+  },
+  "multicall3": {
+    "address": "0xcA11bde05977b3631167028862bE2a173976CA11",
+    "_source": "canonical deterministic Multicall3 (https://github.com/mds1/multicall3); bytecode verified on-chain 2026-10-09"
+  }
+}
