@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#18211f"/>
+      <stop offset="1" stop-color="#0a0e0d"/>
+    </linearGradient>
+    <clipPath id="left"><circle cx="385" cy="500" r="235"/></clipPath>
+  </defs>
+  <circle cx="500" cy="500" r="500" fill="url(#bg)"/>
+  <!-- overlap lens: the spread -->
+  <circle cx="615" cy="500" r="235" fill="#5fbf9f" fill-opacity="0.27" clip-path="url(#left)"/>
+  <circle cx="385" cy="500" r="235" fill="none" stroke="#e9e7e2" stroke-width="62"/>
+  <circle cx="615" cy="500" r="235" fill="none" stroke="#5fbf9f" stroke-width="62"/>
+  <!-- weave: left ring crosses over at the top so the pair interlocks -->
+  <path d="M 429.8 269.3 A 235 235 0 0 1 556.9 339.7" fill="none" stroke="#e9e7e2" stroke-width="62"/>
+</svg>
